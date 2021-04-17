@@ -7,6 +7,7 @@
     <title>Consultas</title>
     <link rel="stylesheet" href="views/css/bootstrap.css">
     <link rel="stylesheet" href="views/css/app.css">
+    <link rel="stylesheet" href="views/css/sweetalert2.min.css">
 </head>
 <body>
            
@@ -25,55 +26,57 @@
                 <div class="card-body">
 
                          <!--Fin seccion del formulario -->
+                         <form >
                <div class="row mt-4 mb-4">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cliente">Ruc cliente:</label>
-                        <input type="text" class="form-control" id="cliente" >
+                        <input type="text" class="form-control" id="cliente" placeholder="Ruc cliente" required >
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="fecha">Fecha :</label>
-                        <input type="date" class="form-control" id="fecha" placeholder="">
+                        <input type="date" class="form-control" id="fecha" placeholder="" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="">Tipo de documento:</label>
-                        <select class="form-control" id="idDocumento">
+                        <select class="form-control" id="idDocumento" required>
                             <option selected value="01">Factura Electronica</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="03">Boleta</option>
+                            <option value="08">Nota de debito</option>
                           </select>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="serie">Serie :</label>
-                        <input type="text" class="form-control" id="serie" placeholder="">
+                        <input type="text" class="form-control" id="serie" placeholder="Serie" required>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="numero">Numero :</label>
-                        <input type="number" class="form-control" id="numero" placeholder="">
+                        <input type="number" class="form-control" id="numero" placeholder="Numero" required>
                     </div>
 
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="monto">Monto :</label>
-                        <input type="number" class="form-control" id="monto" placeholder="">
+                        <input type="number" class="form-control" id="monto" placeholder="Monto" required>
                     </div>
 
                 </div>
                 <input type="hidden" name="datosCon"  id="datosCon">
                 <div class="col-md-8 mt-4">
-                    <button  class="btn btn-success eventoConsultar">Consultar Documento </button>
+                    <button  type="submit"  class="btn btn-success eventoConsultar">Consultar Documento </button>
 
                 </div>
            </div>
+           </form>
         <!--Fin seccion del formulario -->
           
                 </div>
@@ -105,5 +108,6 @@
     
 
     <script src="views/js/app.js"></script>
+    <script src="views/js/sweetalert2.all.min.js"></script>
 </body>
 </html>

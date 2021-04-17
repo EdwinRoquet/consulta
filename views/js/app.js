@@ -15,15 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //diparar evento Ruc Empleos
         if (e.target.classList.contains('eventoConsultar')) {
+            e.preventDefault();
                //validar que en el input haya  un dato
-            if (document.querySelector('#cliente').value ) {
+
+               let id = document.querySelector('#idDocumento').value;
+               let serie = document.querySelector('#serie').value;
+               let num = document.querySelector('#numero').value;
+               let fecha = document.querySelector('#fecha').value;
+               let monto = document.querySelector('#monto').value;
+               let ruc = document.querySelector('#cliente').value;
+            if (!ruc == ''&& !id == ''&& !serie == ''&& !num  == ''&& !fecha == '' && !monto == '') {
                              
                    // Crear llamado ajax
                    const xhr = new XMLHttpRequest();
                     // enviar datos por formdata
                    let idBase = document.querySelector('#cliente').value;
                    const data = new FormData();
-                   // data.append('idBase', '10427489341');
                    data.append('idBase', idBase);
                    // Abrir la conexion
                    xhr.open('POST', 'respuesta.php', true);
@@ -33,14 +40,27 @@ document.addEventListener('DOMContentLoaded', function () {
                        if(this.status === 200) {
                            // obtener datos de la respuesta
                            let respuesta = JSON.parse(xhr.responseText);
-                        //  console.log(respuesta)
-                         enviarSegundaConsulta(respuesta,e);               
+                           if (respuesta.status == 'error') {
+                            swal({
+                                type: 'error',
+                                title: 'Error!',
+                                text: 'No hay información con los datos solicitados'
+                              })
+                           } else {
+                            enviarSegundaConsulta(respuesta,e);   
+                           }
+                                    
                        }
                    }                 
                    // Enviar el Request
                    xhr.send(data);
                 }else{
-                alert('no hay algo campo cliente');
+
+                swal({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'Todos los campos deben estar llenos'
+                  })
 
             }
       
@@ -72,18 +92,12 @@ document.addEventListener('DOMContentLoaded', function () {
          data.append('id', id);
          data.append('serie', serie);
          data.append('num', num);
-        //  data.append('id', respuesta.id);
-        //  data.append('serie', respuesta.serie);
-        //  data.append('num', respuesta.num);
          // Abrir la conexion
          xhr.open('POST', 'respuesta.php', true);
          
          // En la carga
          xhr.onload = function() {
              if(this.status === 200) {
-                 // obtener datos de la respuesta
-                //  var respuesta = JSON.parse(xhr.responseText);
-            //    console.log( xhr.responseText);
 
                var respuesta = JSON.parse(xhr.responseText);
                console.log(respuesta)
@@ -132,9 +146,6 @@ document.addEventListener('DOMContentLoaded', function () {
          data.append('id', id);
          data.append('serie', serie);
          data.append('num', num);
-        //  data.append('id', respuesta.id);
-        //  data.append('serie', respuesta.serie);
-        //  data.append('num', respuesta.num);
          // Abrir la conexion
          xhr.open('POST', 'respuesta.php', true);
          
@@ -142,8 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
          xhr.onload = function() {
              if(this.status === 200) {
                  // obtener datos de la respuesta
-                //  var respuesta = JSON.parse(xhr.responseText);
-            //    console.log( xhr.responseText);
 
                var respuesta = JSON.parse(xhr.responseText);
                console.log(respuesta)
@@ -191,9 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
       data.append('id', id);
       data.append('serie', serie);
       data.append('num', num);
-     //  data.append('id', respuesta.id);
-     //  data.append('serie', respuesta.serie);
-     //  data.append('num', respuesta.num);
       // Abrir la conexion
       xhr.open('POST', 'respuesta.php', true);
       
@@ -243,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    function  enviarSegundaConsulta( respuesta, e){
+      function  enviarSegundaConsulta( respuesta, e)  {
         // Crear llamado ajax
         const xhr = new XMLHttpRequest();
         // enviar datos por formdata
@@ -264,11 +270,6 @@ document.addEventListener('DOMContentLoaded', function () {
          data.append('fecha', fecha);
          data.append('monto', monto);
 
-         //  data.append('id', '01');
-         //  data.append('serie', 'F001');
-         //  data.append('num', '00000001');
-         //  data.append('fecha', '2021-03-25');
-         //  data.append('monto', '150');
          // Abrir la conexion
          xhr.open('POST', 'respuesta.php', true);
          
@@ -282,14 +283,20 @@ document.addEventListener('DOMContentLoaded', function () {
                    document.querySelector('.btnDescarga').removeAttribute('disabled');
                    document.querySelector('.btnDescarga2').removeAttribute('disabled');
                    document.querySelector('.btnDescarga3').removeAttribute('disabled');
-
-                   
-
-                    document.querySelector('#datosCon').value = JSON.stringify(respuesta);
+                   document.querySelector('#datosCon').value = JSON.stringify(respuesta);
+                    swal({
+                        type: 'success',
+                        title: 'Hay datos con los archivos seleccionados',
+                        text: 'Seleccione el boton correspondiente'
+                      });
          
 
                }else{
-                   alert('No hay archivos con los datos solicitados');
+                   swal({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'No hay archivos con los datos solicitados'
+                  })
                }
                                             
              }

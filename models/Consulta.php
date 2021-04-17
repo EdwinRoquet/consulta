@@ -14,7 +14,7 @@ class Consulta
     'serverName'=> 'tu server',
     'database'=> 'tu base',
     'uid'=> 'tu usuario',
-    'pwd'=> 'tu contraseña',
+    'pwd'=> 'tu contra',
     ];
     //Conexion a Bas de Datos
     $conexion = new Conection($args);
@@ -39,7 +39,7 @@ class Consulta
       
 }
    // Retornamos un arreglo asociativo como respuesta
-    return $data;
+    return $data ?? ['status'=>'error'];
  }
 /*=====================================================================
           Metodo que ejecuta el segundo call exec sp_comprobante_buscar_web
